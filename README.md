@@ -2,8 +2,8 @@
 
 A modern and open multi-sample file format for data exchange between sample-based instruments, to simplify the workflow for end users and sound designers. The format is limited to basic sample mappings, leaving out all playback and sound-shaping parameters to the preset of the relevant instrument.  
 
-Authors: Bitwig & 
-PreSonus Software
+Authors: 
+Bitwig & PreSonus Software
 
 ## Goals
 
@@ -38,6 +38,99 @@ Multichannel files are allowed, but it is not to be expected that all players su
 A multisample may contain groups, which organize samples into logical groups. A group does not have any meaning for the sound synthesis, it is used to organize samples in an editor.
 
 A sample references an audio file on disk and adds mapping information. It can either be ungrouped (-1) or be part of a specified group.
+
+```xml
+<multisample>
+   <group name="First"/>
+   <group name="Second"/>
+   <sample/>
+   <sample/>
+</multisample>
+```
+
+| name        | String attribute | Name of the multisample.                              |
+|-------------|------------------|-------------------------------------------------------|
+| generator   | String element   | Software which generated the file                     |
+| category*   | String element   | Category of the multisample (ie Drum / Keyboard / FX) |
+| creator     | String element   | User who created the file.                            |
+| description | String element   | A longer description of the multisample.              |
+| keywords    |                  |                                                       |
+
+## Multisample Definition
+
+Apart from the groups and samples, the multisample element also contain metadata of the sample.
+
+```xml
+<multisample name="Acoustic Bass">
+    <generator>Bitwig Studio</generator>
+    <category>Bass</category>
+    <creator>Genys</creator>
+    <description>A nice acoustics bass recorded at a 9562 m altitude.</description>
+    <keywords>
+        <keyword>Bass</keyword>
+        <keyword>Acoustic</keyword>
+        <keyword>Plucked</keyword>
+    </keywords>
+    <group … />
+    <group … />
+    <sample> … </sample>
+    <sample> … </sample>
+</multisample>
+
+```
+
+| Property | Unit       | Description                 | Default |
+|----------|------------|-----------------------------|---------|
+| sample   |            |                             |         |
+| name     | String     | Displayed name of the group |         |
+| color    | Hex string | Like in HTML: d92e24        |         |
+
+## Sample definition
+
+```xml
+<sample file="AcBass bowloop E1.wav" gain="0.000" sample-start="0" sample-stop="5669442" round-robin="1">
+<key root="40" tune="-50.22" track="true" low="24" high="40" low-fade="10" high-fade="0"/>
+<velocity high="127" low="0"/>
+	<loop mode="sustain" start="256.22" stop="56694.42"/>
+</sample>
+```
+
+| Property     | Unit                      | Description                                              | Default     |
+|--------------|---------------------------|----------------------------------------------------------|-------------|
+| sample       |                           |                                                          |             |
+| file         | String                    | Relative path to audio file                              |             |
+| sample-start | Samples                   | Sample start position                                    | 0.0         |
+| sample-stop  | Samples                   | Sample end position                                      | file length |
+| gain         | Decibels                  |                                                          | 0.0         |
+| group        | int                       | Index of group (-1 means ungrouped)                      | -1          |
+| parameter-1  | float -1 … 1              | Exposed as P1 modulation source                          | 0           |
+| parameter-2  | float -1 … 1              | Exposed as P2 modulation source                          | 0           |
+| parameter-3  | float -1 … 1              | Exposed as P3 modulation source                          | 0           |
+| reverse      | bool                      |                                                          | false       |
+| zone-logic   | String                    | always-play or round-robin                               |             |
+| key          |                           |                                                          |             |
+| root         | semitone                  |                                                          | 60 (C3)     |
+| track        | float 0 … 2               | 1 = 100%                                                 | 1           |
+| tune         | relative semitone (float) | Fine tuning or transposition of the sample.              | 0.0         |
+| low          | semitone                  |                                                          | 0           |
+| high         | semitone                  |                                                          | 127         |
+| low-fade     | semitone                  |                                                          | 0           |
+| high-fade    | semitone                  |                                                          | 0           |
+| velocity     |                           |                                                          |             |
+| low          | velocity                  |                                                          | 1           |
+| high         | velocity                  |                                                          | 127         |
+| low-fade     | velocity                  |                                                          | 0           |
+| high-fade    | velocity                  |                                                          | 0           |
+| select       |                           |                                                          |             |
+| low          | select                    |                                                          | 1           |
+| high         | select                    |                                                          | 127         |
+| low-fade     | select                    |                                                          | 0           |
+| high-fade    | select                    |                                                          | 0           |
+| loop         |                           |                                                          |             |
+| mode         | String                    | off, loop or ping-pong                                   | off         |
+| start        | Samples, float            |                                                          | 0.0         |
+| stop         | Samples, float            |                                                          | file length |
+| fade         | 0 .. 1                    | Multiply with (stop - start) to the get crossfade length | 0.0         |
 
 ## XML Schema
 
