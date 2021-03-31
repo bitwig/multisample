@@ -9,11 +9,15 @@ import jakarta.xml.bind.annotation.*;
 @XmlSeeAlso({Group.class, Sample.class})
 public class Multisample
 {
-   /** Name of the multisample. */
+   /** 
+    * Name of the multisample. 
+    */
    @XmlAttribute(required = true)
    public String name;
 
-   /** Software which generated the file */
+   /** 
+    * Software which generated the file.
+    */
    @XmlElement(required = true)
    public String generator;
 
