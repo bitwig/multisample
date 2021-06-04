@@ -55,6 +55,27 @@
                <maxmem>1024m</maxmem>
             </configuration>
          </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxb2-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>schemagen</id>
+                    <goals>
+                        <goal>schemagen</goal>
+                    </goals>
+                   <configuration>
+                      <schemaSourceExcludeFilters>
+                         <noJaxbIndex implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
+                            <patterns>
+                               <pattern>\.Util.java</pattern>
+                            </patterns>
+                         </noJaxbIndex>
+                      </schemaSourceExcludeFilters>
+                   </configuration>
+                </execution>
+            </executions>
+        </plugin>
       </plugins>
    </build>
 
