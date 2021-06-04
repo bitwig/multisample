@@ -30,6 +30,7 @@ public class MultisampleTest
    {
       var multisample = createDummyMultisample();
 
+      new File("target").mkdirs();
       Util.save(multisample, new HashMap(), new File("target/test.multisample"));
       Util.saveXML(multisample, new File("target/test.multisample.xml"));
    }
@@ -58,6 +59,7 @@ public class MultisampleTest
    @Test
    public void writeSchema() throws IOException
    {
+      new File("target").mkdirs();
       Util.exportSchema(new File("target/multisample.xs"), Multisample.class);
    }
 
