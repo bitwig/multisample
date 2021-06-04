@@ -64,18 +64,17 @@
                     <goals>
                         <goal>schemagen</goal>
                     </goals>
+                   <configuration>
+                      <schemaSourceExcludeFilters>
+                         <noJaxbIndex implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
+                            <patterns>
+                               <pattern>\.Util.java</pattern>
+                            </patterns>
+                         </noJaxbIndex>
+                      </schemaSourceExcludeFilters>
+                   </configuration>
                 </execution>
             </executions>
-            <configuration>
-             <!--<javaDocRenderer>org.acme.render.MyJavaDocRenderer</javaDocRenderer>-->
-                <schemaSourceExcludeFilters>
-                    <noJaxbIndex implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
-                        <patterns>
-                            <pattern>\.Util.java</pattern>
-                        </patterns>
-                    </noJaxbIndex>
-                </schemaSourceExcludeFilters>
-            </configuration>
         </plugin>
       </plugins>
    </build>
