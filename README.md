@@ -89,9 +89,9 @@ Apart from the groups and samples, the multisample element also contain metadata
 
 ```xml
 <sample file="AcBass bowloop E1.wav" gain="0.000" sample-start="0" sample-stop="5669442" round-robin="1">
-<key root="40" tune="-50.22" track="true" low="24" high="40" low-fade="10" high-fade="0"/>
+<key root="40" tune="-50.22" track="1" low="24" high="40" low-fade="10" high-fade="0"/>
 <velocity high="127" low="0"/>
-	<loop mode="sustain" start="256.22" stop="56694.42"/>
+	<loop mode="loop" start="256.22" stop="56694.42"/>
 </sample>
 ```
 
